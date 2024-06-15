@@ -217,6 +217,7 @@ call plug#begin()
 Plug 'ThePrimeagen/vim-be-good'
 
 " Telescope
+" Also do `choco install ripgrep` so that Telescope ignores .git/* and .gitignore 
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'neovim/nvim-lspconfig'
@@ -285,7 +286,9 @@ map + ~
 " Cpp: I have read for about 20 minutes or so that some people use 80 characters, some 120, so 100 is kind of a middle ground 
 autocmd FileType python set colorcolumn=73,80
 autocmd FileType c++ set colorcolumn=101
-autocmd FileType cpp set colorcolumn=101  " Just in case 
+
+" Just in case
+autocmd FileType cpp set colorcolumn=101
 
 " Get the Golang documentation for the selected code when shift+k is pressed.
 " The default functionality of shift+k is still present for every other filetype
