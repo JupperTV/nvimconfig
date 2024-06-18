@@ -92,13 +92,6 @@ syntax enable
 " Set regular expression engine automatically
 set regexpengine=0
 
-try
-    colorscheme desert
-catch
-endtry
-
-set background=dark
-
 " Set utf8 as standard encoding and en_US as the standard language
 set encoding=utf8
 
@@ -224,11 +217,15 @@ Plug 'neovim/nvim-lspconfig'
 Plug 'nvim-tree/nvim-web-devicons'
 Plug 'nvim-telescope/telescope.nvim'
 
-" I saw Primeagen having something like this
-Plug 'dense-analysis/ale'
+" I saw Primeagen having something like this.
+" Commented out because https://github.com/dense-analysis/ale/issues/4642 .
+" Cosidering that https://github.com/dense-analysis/ale/pull/4738 still hasn't been merged after multiple months
+" Plug 'dense-analysis/ale'
 
 " A better Go experience
 Plug 'fatih/vim-go'
+
+Plug 'folke/tokyonight.nvim'
 
 call plug#end()
 
@@ -238,10 +235,10 @@ call plug#end()
 set nu
 set rnu
 
-" Neovim is a bit buggy inside windows terminal
+" This prevents the terminal's cursor being neovim's cursor instead
+" of the one it was meant to be after exiting neovim.
+" So now neovim uses the terminal's cursor.
 autocmd VimLeave * set guicursor= | call chansend(v:stderr, "\x1b[ q")
-
-" The cursor now uses the terminal's cursor
 set guicursor=
 
 " Switch nu and rnu depending on whether neovim is focused or not 
@@ -268,14 +265,17 @@ set clipboard=unnamedplus
 nnoremap ü  ?
 nnoremap ä  /
 
+" + is significantly more accessible than ~ on QWERTZ.
+" I have never and will never use + and - to move up and down a line 
+map + ~
+
 " The ö-key in QWERTZ is where : and ; are in QWERTY.
 " I use the Spacebar to go into command mode anyway.
 nnoremap ö <cmd>Telescope find_files<cr>
 nnoremap Ö <cmd>Telescope<cr>
+nnoremap - <cmd>Telescope live_grep<cr>
 
-" + is significantly more accessible than ~ on QWERTZ.
-" Also, I have never and will never use + and - to move up and down a line 
-map + ~
+colorscheme tokyonight-moon
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Language specific
