@@ -1,5 +1,5 @@
 
 require('telescope').setup {
-	file_ignore_patters = { "^node_modules/", ".cache", "%.o", "%.a", "%.out", "%.class", "%.pdf", "%.mkv", "%.mp4", "%.zip" }
+	file_ignore_patters = { "^node_modules/", ".cache", "%.o", "%.a", "%.exe", "%.out", "%.class", "%.dll", "%.pdf", "%.mkv", "%.mp4", "%.zip" }
 }
 
