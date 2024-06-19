@@ -225,7 +225,7 @@ Plug 'nvim-telescope/telescope.nvim'
 " A better Go experience
 Plug 'fatih/vim-go'
 
-Plug 'folke/tokyonight.nvim'
+Plug 'catppuccin/nvim'
 
 call plug#end()
 
@@ -275,7 +275,7 @@ nnoremap ö <cmd>Telescope find_files<cr>
 nnoremap Ö <cmd>Telescope<cr>
 nnoremap - <cmd>Telescope live_grep<cr>
 
-colorscheme tokyonight-moon
+colorscheme catppuccin-macchiato
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Language specific
@@ -294,6 +294,7 @@ autocmd FileType cpp set colorcolumn=101
 " The default functionality of shift+k is still present for every other filetype
 au filetype go vnoremap K :GoDoc<cr>
 
+nnoremap % :%s/
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Lua
