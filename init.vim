@@ -292,9 +292,7 @@ autocmd FileType cpp set colorcolumn=101
 
 " Get the Golang documentation for the selected code when shift+k is pressed.
 " The default functionality of shift+k is still present for every other filetype
-au filetype go vnoremap K :GoDoc<cr>
-
-nnoremap % :%s/
+au filetype go vnoremap K <cmd>GoDoc<cr>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Lua
