@@ -275,6 +275,12 @@ nnoremap ö <cmd>Telescope find_files<cr>
 nnoremap Ö <cmd>Telescope<cr>
 nnoremap - <cmd>Telescope live_grep<cr>
 
+" 2 Years of vim/nvim usage finally led me to using a leader key
+let mapleader = ','
+
+" The leader key appears/disappears in the bottom right corner
+set showcmd
+
 colorscheme catppuccin-macchiato
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -300,4 +306,3 @@ au filetype go vnoremap K <cmd>GoDoc<cr>
 
 " Lastly, load the lua file
 lua require('init')
-
