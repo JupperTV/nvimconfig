@@ -239,7 +239,7 @@ set rnu
 " 2 Years of vim/nvim usage finally led me to using a leader key
 let mapleader = ','
 
-" The leader key appears/disappears in the bottom right corner
+" The leader key appears/disappears in the bottom right corner when pressed
 set showcmd
 
 " This prevents the terminal's cursor being neovim's cursor instead
