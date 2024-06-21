@@ -218,13 +218,14 @@ Plug 'nvim-tree/nvim-web-devicons'
 Plug 'nvim-telescope/telescope.nvim'
 
 " I saw Primeagen having something like this.
-" Commented out because https://github.com/dense-analysis/ale/issues/4642 .
-" Cosidering that https://github.com/dense-analysis/ale/pull/4738 still hasn't been merged after multiple months
+" Commented out because https://github.com/dense-analysis/ale/issues/4642
+" even though https://github.com/dense-analysis/ale/pull/4738 exists, it still hasn't been merged
 " Plug 'dense-analysis/ale'
 
 " A better Go experience
 Plug 'fatih/vim-go'
 
+" catppuccin theme
 Plug 'catppuccin/nvim'
 
 call plug#end()
@@ -234,6 +235,12 @@ call plug#end()
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set nu
 set rnu
+
+" 2 Years of vim/nvim usage finally led me to using a leader key
+let mapleader = ','
+
+" The leader key appears/disappears in the bottom right corner
+set showcmd
 
 " This prevents the terminal's cursor being neovim's cursor instead
 " of the one it was meant to be after exiting neovim.
@@ -274,12 +281,6 @@ map + ~
 nnoremap ö <cmd>Telescope find_files<cr>
 nnoremap Ö <cmd>Telescope<cr>
 nnoremap - <cmd>Telescope live_grep<cr>
-
-" 2 Years of vim/nvim usage finally led me to using a leader key
-let mapleader = ','
-
-" The leader key appears/disappears in the bottom right corner
-set showcmd
 
 colorscheme catppuccin-macchiato
 
