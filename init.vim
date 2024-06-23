@@ -228,6 +228,11 @@ Plug 'fatih/vim-go'
 " catppuccin theme
 Plug 'catppuccin/nvim'
 
+" gcc: Comment out a line
+" gc + motion: Comment out target of a motion
+" gcgc: Uncomment a line
+Plug 'tpope/vim-commentary'
+
 call plug#end()
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
