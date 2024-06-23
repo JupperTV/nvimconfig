@@ -263,6 +263,9 @@ augroup END
 " y removes highlighting
 nnoremap y :noh<CR>
 
+" Go into "Replace string"-mode when leader + s is pressed
+nnoremap <leader>s :%s/
+
 " It's a lot easier to type a colon in QWERTY than it is in QWERTZ
 nnoremap <space> :
 
