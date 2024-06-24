@@ -218,14 +218,20 @@ Plug 'nvim-tree/nvim-web-devicons'
 Plug 'nvim-telescope/telescope.nvim'
 
 " I saw Primeagen having something like this.
-" Commented out because https://github.com/dense-analysis/ale/issues/4642 .
-" Cosidering that https://github.com/dense-analysis/ale/pull/4738 still hasn't been merged after multiple months
+" Commented out because https://github.com/dense-analysis/ale/issues/4642
+" even though https://github.com/dense-analysis/ale/pull/4738 exists, it still hasn't been merged
 " Plug 'dense-analysis/ale'
 
 " A better Go experience
 Plug 'fatih/vim-go'
 
+" catppuccin theme
 Plug 'catppuccin/nvim'
+
+" gcc: Comment out a line
+" gc + motion: Comment out target of a motion
+" gcgc: Uncomment a line
+Plug 'tpope/vim-commentary'
 
 call plug#end()
 
@@ -234,6 +240,12 @@ call plug#end()
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set nu
 set rnu
+
+" 2 Years of vim/nvim usage finally led me to using a leader key
+let mapleader = ','
+
+" The leader key appears/disappears in the bottom right corner when pressed
+set showcmd
 
 " This prevents the terminal's cursor being neovim's cursor instead
 " of the one it was meant to be after exiting neovim.
@@ -250,6 +262,9 @@ augroup END
 
 " y removes highlighting
 nnoremap y :noh<CR>
+
+" Go into "Replace string"-mode when leader + s is pressed
+nnoremap <leader>s :%s/
 
 " It's a lot easier to type a colon in QWERTY than it is in QWERTZ
 nnoremap <space> :
@@ -292,8 +307,7 @@ autocmd FileType cpp set colorcolumn=101
 
 " Get the Golang documentation for the selected code when shift+k is pressed.
 " The default functionality of shift+k is still present for every other filetype
-au filetype go vnoremap K :GoDoc<cr>
-
+au filetype go vnoremap K <cmd>GoDoc<cr>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Lua
@@ -301,4 +315,3 @@ au filetype go vnoremap K :GoDoc<cr>
 
 " Lastly, load the lua file
 lua require('init')
-
