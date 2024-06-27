@@ -212,15 +212,18 @@ Plug 'ThePrimeagen/vim-be-good'
 " Telescope
 " Also do `choco install ripgrep` so that Telescope ignores .git/* and .gitignore 
 Plug 'nvim-lua/plenary.nvim'
-Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'neovim/nvim-lspconfig'
 Plug 'nvim-tree/nvim-web-devicons'
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'nvim-telescope/telescope.nvim'
 
 " I saw Primeagen having something like this.
-" Commented out because https://github.com/dense-analysis/ale/issues/4642
-" even though https://github.com/dense-analysis/ale/pull/4738 exists, it still hasn't been merged
-" Plug 'dense-analysis/ale'
+" Keep in mind that https://github.com/dense-analysis/ale/issues/4642 exists and 
+" https://github.com/dense-analysis/ale/pull/4738 hasn't been merged either.
+" Because of the slowness, only Plug Ale if it's my personal home PC
+if !empty(glob("C:\\thisOnlyExistsOnMyHomePC.txt"))
+	Plug 'dense-analysis/ale'
+endif
 
 " A better Go experience
 Plug 'fatih/vim-go'
