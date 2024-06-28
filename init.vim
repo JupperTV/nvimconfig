@@ -1,4 +1,11 @@
-" SOURCE (mostly): https://github.com/amix/vimrc/blob/master/vimrcs/basic.vim
+" * SOURCE (mostly): https://github.com/amix/vimrc/blob/master/vimrcs/basic.vim
+" Everything from General to the helper functions are from the basic.vim config.
+" The parts of this config called Plugins, My own Configs, Language specific,
+" 	and Lua were all added by me
+" I also removed a lot of things from the basic.vim config, mostly because this
+" 	started out as the config I used for when I had to use a Raspberry Pi,
+" 	which I used vim on.
+" If any comments start with a * then that means I edited them
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => General
@@ -95,7 +102,7 @@ set regexpengine=0
 " Set utf8 as standard encoding and en_US as the standard language
 set encoding=utf8
 
-" Use ~~Unix~~ **DOS** as the standard file type
+" * Use ~~Unix~~ **DOS** as the standard file type
 set ffs=dos,unix,mac
 
 
@@ -111,9 +118,6 @@ set noswapfile
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Text, tab and indent related
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Use spaces instead of tabs
-" set expandtab
-
 " Be smart when using tabs ;)
 set smarttab
 
@@ -149,9 +153,6 @@ set statusline=\ %{HasPaste()}%F%m%r%h\ %w\ \ \ \ Line:\ %l\ \ Column:\ %c
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Editing mappings
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Remap VIM 0 to first non-blank character
-" map 0 ^
-
 " Delete trailing white space on save, useful for some filetypes ;)
 fun! CleanExtraSpaces()
     let save_cursor = getpos(".")
@@ -219,9 +220,10 @@ Plug 'nvim-telescope/telescope.nvim'
 
 " I saw Primeagen having something like this.
 " Keep in mind that https://github.com/dense-analysis/ale/issues/4642 exists and 
-" https://github.com/dense-analysis/ale/pull/4738 hasn't been merged either.
-" Ale slows down the process of going from insert mode to normal mode on my laptop to a whole second.
-" Probably because it's a 2013 Thinkpad
+" 	https://github.com/dense-analysis/ale/pull/4738 hasn't been merged either.
+" Ale slows down the process of going from insert mode to normal mode on my laptop
+" 	from almost instantly to 1 second. (Probably because it's a 2013 Thinkpad)
+" Only Plug Ale if it's my PC at home
 if !empty(glob("C:\\thisOnlyExistsOnMyHomePC.txt"))
 	Plug 'dense-analysis/ale'
 endif
@@ -255,12 +257,13 @@ let mapleader = ','
 set showcmd
 
 " This prevents the terminal's cursor being neovim's cursor instead
-" of the one it was meant to be after exiting neovim.
+" 	of the one it was meant to be after exiting neovim.
 " So now neovim uses the terminal's cursor.
+" TL;DR: Neovim acts weird on Windows Terminal
 autocmd VimLeave * set guicursor= | call chansend(v:stderr, "\x1b[ q")
 set guicursor=
 
-" Switch nu and rnu depending on whether neovim is focused or not 
+" Switch nu and rnu depending on whether the window is focused or not 
 augroup numbertoggle
 	autocmd!
 	autocmd BufEnter,FocusGained,InsertLeave,WinEnter	* if &nu && mode() != "i"	| set rnu | endif
@@ -270,10 +273,11 @@ augroup END
 " y removes highlighting
 nnoremap y :noh<CR>
 
-" Go into "Replace string"-mode when leader + s is pressed
+" Enter the prefix for replacing string when leader + s is pressed
 nnoremap <leader>s :%s/
 
-" It's a lot easier to type a colon in QWERTY than it is in QWERTZ
+" It's a lot easier to type a colon in QWERTY than it is in QWERTZ,
+" 	so enter command mode when the spacebar is pressed
 nnoremap <space> :
 
 " Change cwd to the path of the file
@@ -282,17 +286,19 @@ set autochdir
 " Use the system clipboard to yank and paste
 set clipboard=unnamedplus
 
-" Vim is adjusted for QWERTY, which adds a few issues when using QWERTZ 
+" Vim is adjusted for QWERTY which adds a few issues when using QWERTZ.
 " Partial Source: https://unix.stackexchange.com/questions/257392/vim-with-foreign-qwertz-keyboard
 nnoremap ü  ?
 nnoremap ä  /
 
-" + is significantly more accessible than ~ on QWERTZ.
-" I have never and will never use + and - to move up and down a line 
+
+" I have never and will never use + and - to move up and down a line.
+" Also + is significantly more accessible than ~ on QWERTZ
+" 	so change the key for switching cases from ~ to +
 map + ~
 
 " The ö-key in QWERTZ is where : and ; are in QWERTY.
-" I use the Spacebar to go into command mode anyway.
+" I use the spacebar to go into command mode anyway.
 nnoremap ö <cmd>Telescope find_files<cr>
 nnoremap Ö <cmd>Telescope<cr>
 nnoremap - <cmd>Telescope live_grep<cr>
@@ -304,8 +310,11 @@ colorscheme catppuccin-macchiato
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " Rulers for Python and C++
-" Python: PEP8 says 'Limit all lines to a maximum of 79 characters. For (...) docstrings or comments, the line length should be limited to 72 characters'
-" Cpp: I have read for about 20 minutes or so that some people use 80 characters, some 120, so 100 is kind of a middle ground 
+" Python: PEP8 says 'Limit all lines to a maximum of 79 characters.
+" 		  For (...) docstrings or comments, the line length should
+" 		  be limited to 72 characters'
+" Cpp: I have read for about 20 minutes or so that some people use
+" 	   80 characters, some 120, so 100 is kind of a middle ground 
 autocmd FileType python set colorcolumn=73,80
 autocmd FileType c++ set colorcolumn=101
 
