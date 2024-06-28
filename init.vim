@@ -220,10 +220,11 @@ Plug 'nvim-telescope/telescope.nvim'
 " I saw Primeagen having something like this.
 " Keep in mind that https://github.com/dense-analysis/ale/issues/4642 exists and 
 " https://github.com/dense-analysis/ale/pull/4738 hasn't been merged either.
-" I might uncomment this if the slow-down still exists on my old 2013 Thinkpad.
-"if !empty(glob("C:\\thisOnlyExistsOnMyHomePC.txt"))
+" Ale slows down the process of going from insert mode to normal mode on my laptop to a whole second.
+" Probably because it's a 2013 Thinkpad
+if !empty(glob("C:\\thisOnlyExistsOnMyHomePC.txt"))
 	Plug 'dense-analysis/ale'
-"endif
+endif
 
 " A better Go experience
 Plug 'fatih/vim-go'
@@ -258,9 +259,6 @@ set showcmd
 " So now neovim uses the terminal's cursor.
 autocmd VimLeave * set guicursor= | call chansend(v:stderr, "\x1b[ q")
 set guicursor=
-
-" Apparently this fixes Ale's slow-down on my Laptop
-inoremap <C-c> <Esc>
 
 " Switch nu and rnu depending on whether neovim is focused or not 
 augroup numbertoggle
