@@ -276,6 +276,9 @@ nnoremap y :noh<CR>
 " Enter the prefix for replacing string when leader + s is pressed
 nnoremap <leader>s :%s/
 
+" leader + o insert a new line at cursor
+nmap <leader>o i<cr><Esc>
+
 " It's a lot easier to type a colon in QWERTY than it is in QWERTZ,
 " 	so enter command mode when the spacebar is pressed
 nnoremap <space> :
