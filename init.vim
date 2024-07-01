@@ -5,7 +5,8 @@
 " I also removed a lot of things from the basic.vim config, mostly because this
 " 	started out as the config I used for when I had to use a Raspberry Pi,
 " 	which I used vim on.
-" If any comments start with a * then that means I edited them
+" If any comment that was in the original config file starts with a * then that
+" 	means I edited that part of the config
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => General
@@ -51,6 +52,9 @@ set ruler
 
 " Height of the command bar
 set cmdheight=1
+
+" A buffer becomes hidden when it is abandoned
+set hid
 
 " Configure backspace so it acts as it should act
 set backspace=eol,start,indent
@@ -128,7 +132,6 @@ set tabstop=4
 " Linebreak on 500 characters
 set lbr
 set tw=500
-
 set ai "Auto indent
 set si "Smart indent
 set wrap "Wrap lines
@@ -261,6 +264,7 @@ set showcmd
 " So now neovim uses the terminal's cursor.
 " TL;DR: Neovim acts weird on Windows Terminal
 autocmd VimLeave * set guicursor= | call chansend(v:stderr, "\x1b[ q")
+
 set guicursor=
 
 " Switch nu and rnu depending on whether the window is focused or not 
@@ -271,7 +275,7 @@ augroup numbertoggle
 augroup END
 
 " y removes highlighting
-nnoremap y :noh<CR>
+nnoremap <silent>y :noh<CR>
 
 " Enter the prefix for replacing string when leader + s is pressed
 nnoremap <leader>s :%s/
@@ -294,6 +298,10 @@ set clipboard=unnamedplus
 nnoremap ü  ?
 nnoremap ä  /
 
+" noremap <silent> <C-w>+ <cmd>resize +2<CR>
+" noremap <silent> <C-w>- <cmd>resize -2<CR>
+noremap <silent> <C-w>+ <cmd>vertical resize +5<CR>
+noremap <silent> <C-w>- <cmd>vertical resize -5<CR>
 
 " I have never and will never use + and - to move up and down a line.
 " Also + is significantly more accessible than ~ on QWERTZ
