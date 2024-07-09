@@ -228,12 +228,9 @@ Plug 'nvim-telescope/telescope.nvim'
 " I saw Primeagen having something like this.
 " Keep in mind that https://github.com/dense-analysis/ale/issues/4642 exists and 
 " 	https://github.com/dense-analysis/ale/pull/4738 hasn't been merged either.
-" Ale slows down the process of going from insert mode to normal mode on my laptop
-" 	from almost instantly to 1 second. (Probably because it's a 2013 Thinkpad)
-" Only Plug Ale if it's my PC at home
-if !empty(glob("C:\\thisOnlyExistsOnMyHomePC.txt"))
-	Plug 'dense-analysis/ale'
-endif
+" Ale slows down the process of going from insert mode to normal mode from almost
+" 	instantly to 1 second.
+" Plug 'dense-analysis/ale'
 
 " A better Go experience
 Plug 'fatih/vim-go'
