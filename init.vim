@@ -304,6 +304,12 @@ nnoremap ä  /
 noremap <silent> <C-w>+ <cmd>vertical resize +5<CR>
 noremap <silent> <C-w>- <cmd>vertical resize -5<CR>
 
+" Enable the :Man command shipped inside Neovim's man filetype plugin.
+" And map "man" to "Man". And yes, I know that user commands have to start
+" 	with a capital letter but I don't care enough
+runtime ftplugin/man.vim
+cabbrev man Man
+
 " I have never and will never use + and - to move up and down a line.
 " Also + is significantly more accessible than ~ on QWERTZ
 " 	so change the key for switching cases from ~ to +
