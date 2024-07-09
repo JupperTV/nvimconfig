@@ -330,8 +330,15 @@ noremap <silent> <C-w>- <cmd>vertical resize -5<CR>
 runtime ftplugin/man.vim
 cabbrev man Man
 
-
+" akinsho/bufferline.nvim needs this
 set termguicolors
+
+" Go to previous/next buffer with Ctrl+h and Ctrl+l
+nmap <C-h> <cmd>bprev<cr>
+nmap <C-l> <cmd>bnext<cr>
+
+" Close buffer with Ctrl+w ctrl+w
+nmap <C-w><C-w> <cmd>Bclose<cr>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Language specific
