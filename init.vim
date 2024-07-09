@@ -214,7 +214,7 @@ call plug#begin()
 Plug 'ThePrimeagen/vim-be-good'
 
 " Telescope
-" Also do `choco install ripgrep` so that Telescope ignores .git/* and .gitignore 
+" Also do `choco install ripgrep` in order for Telescope to ignore .git/* and .gitignore 
 Plug 'nvim-lua/plenary.nvim'
 Plug 'neovim/nvim-lspconfig'
 Plug 'nvim-tree/nvim-web-devicons'
@@ -277,13 +277,13 @@ augroup END
 " y removes highlighting
 nnoremap <silent>y :noh<CR>
 
-" Enter the prefix for replacing string when leader + s is pressed
+" Enter the prefix for replacing strings when leader + s is pressed
 nnoremap <leader>s :%s/
 
-" leader + o insert a new line at cursor
+" leader + o inserts a new line at cursor
 nmap <leader>o i<cr><Esc>
 
-" It's a lot easier to type a colon in QWERTY than it is in QWERTZ,
+" It's a lot easier to type a colon on QWERTY than it is on QWERTZ,
 " 	so enter command mode when the spacebar is pressed
 nnoremap <space> :
 
@@ -298,6 +298,7 @@ set clipboard=unnamedplus
 nnoremap ü  ?
 nnoremap ä  /
 
+" Resize the window with Ctrl+w++ and Ctrl+w+-
 " noremap <silent> <C-w>+ <cmd>resize +2<CR>
 " noremap <silent> <C-w>- <cmd>resize -2<CR>
 noremap <silent> <C-w>+ <cmd>vertical resize +5<CR>
@@ -308,7 +309,7 @@ noremap <silent> <C-w>- <cmd>vertical resize -5<CR>
 " 	so change the key for switching cases from ~ to +
 map + ~
 
-" The ö-key in QWERTZ is where : and ; are in QWERTY.
+" The ö-key on QWERTZ is where : and ; are on QWERTY.
 " I use the spacebar to go into command mode anyway.
 nnoremap ö <cmd>Telescope find_files<cr>
 nnoremap Ö <cmd>Telescope<cr>
