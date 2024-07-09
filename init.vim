@@ -249,6 +249,9 @@ Plug 'joeytwiddle/sexy_scroller.vim'
 " gcgc: Uncomment a line
 Plug 'tpope/vim-commentary'
 
+" It's time to use buffers...
+Plug 'akinsho/bufferline.nvim', {'tag': '*'}
+
 call plug#end()
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -302,18 +305,6 @@ set clipboard=unnamedplus
 nnoremap ü  ?
 nnoremap ä  /
 
-" Resize the window with Ctrl+w++ and Ctrl+w+-
-" noremap <silent> <C-w>+ <cmd>resize +2<CR>
-" noremap <silent> <C-w>- <cmd>resize -2<CR>
-noremap <silent> <C-w>+ <cmd>vertical resize +5<CR>
-noremap <silent> <C-w>- <cmd>vertical resize -5<CR>
-
-" Enable the :Man command shipped inside Neovim's man filetype plugin.
-" And map "man" to "Man". And yes, I know that user commands have to start
-" 	with a capital letter but I don't care enough
-runtime ftplugin/man.vim
-cabbrev man Man
-
 " I have never and will never use + and - to move up and down a line.
 " Also + is significantly more accessible than ~ on QWERTZ
 " 	so change the key for switching cases from ~ to +
@@ -326,6 +317,21 @@ nnoremap Ö <cmd>Telescope<cr>
 nnoremap - <cmd>Telescope live_grep<cr>
 
 colorscheme catppuccin-macchiato
+
+" Resize the window with Ctrl+w++ and Ctrl+w+-
+" noremap <silent> <C-w>+ <cmd>resize +2<CR>
+" noremap <silent> <C-w>- <cmd>resize -2<CR>
+noremap <silent> <C-w>+ <cmd>vertical resize +5<CR>
+noremap <silent> <C-w>- <cmd>vertical resize -5<CR>
+
+" Enable the :Man command shipped inside Neovim's man filetype plugin.
+" And map "man" to "Man". And yes, I know that user commands have to start
+" 	with a capital letter but I don't care enough
+runtime ftplugin/man.vim
+cabbrev man Man
+
+
+set termguicolors
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Language specific
