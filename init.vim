@@ -214,7 +214,11 @@ call plug#begin()
 Plug 'ThePrimeagen/vim-be-good'
 
 " Telescope
-" Also do `choco install ripgrep` in order for Telescope to ignore .git/* and .gitignore 
+" Also do `choco install ripgrep` in order for Telescope to ignore .git/*
+" 	and .gitignore 
+" IMPORTANT: Also install the MSVC toolchain through `choco install mingw` and
+" 			 use mingw's gcc instead of cygwin's.
+" 			 I had to learn this the hard way (https://github.com/nvim-treesitter/nvim-treesitter/issues/6894)
 Plug 'nvim-lua/plenary.nvim'
 Plug 'neovim/nvim-lspconfig'
 Plug 'nvim-tree/nvim-web-devicons'
