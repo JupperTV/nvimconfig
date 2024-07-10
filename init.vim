@@ -233,7 +233,10 @@ Plug 'nvim-telescope/telescope.nvim'
 " Plug 'dense-analysis/ale'
 
 " A better Go experience
-Plug 'fatih/vim-go'
+" Only Plug it if it's my Laptop or my PC at home
+if empty(glob("C:\\thisOnlyExistsOnMyWorkPC.txt"))
+	Plug 'fatih/vim-go'
+endif
 
 " catppuccin theme
 Plug 'catppuccin/nvim'
@@ -260,7 +263,7 @@ set rnu
 " 2 Years of vim/nvim usage finally led me to using a leader key
 let mapleader = ','
 
-" The leader key appears/disappears in the bottom right corner when pressed
+" The recently pressed key/keys appear on the bottom right corner when pressed
 set showcmd
 
 " This prevents the terminal's cursor being neovim's cursor instead
@@ -281,7 +284,7 @@ augroup END
 " y removes highlighting
 nnoremap <silent>y :noh<CR>
 
-" Enter the prefix for replacing strings when leader + s is pressed
+" Enter the prefix for replacing text when leader + s is pressed
 nnoremap <leader>s :%s/
 
 " leader + o inserts a new line at cursor
