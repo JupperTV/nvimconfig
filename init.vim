@@ -106,8 +106,13 @@ set regexpengine=0
 " Set utf8 as standard encoding and en_US as the standard language
 set encoding=utf8
 
-" * Use ~~Unix~~ **DOS** as the standard file type
-set ffs=dos,unix,mac
+" * Use DOS as the standard file type if the current OS is Windows. Else use unix
+"
+if has('unix')  
+	set ffs=unix,dos,mac
+else
+	set ffs=dos,unix,mac
+endif
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
