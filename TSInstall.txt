@@ -1,1 +1,1 @@
-c cpp c_sharp go lua json groovy gitcommit gitignore java vim vimdoc luadoc markdown python yaml
+c cpp c_sharp gitcommit gitignore go groovy java json lua luadoc markdown python vim vimdoc yaml
