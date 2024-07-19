@@ -216,9 +216,10 @@ call plug#begin()
 " The most important one of all. Can't have a neovim config without this
 Plug 'ThePrimeagen/vim-be-good'
 
-" This is supposed to make using LSPs easier
-Plug 'prabirshrestha/vim-lsp'
-Plug 'mattn/vim-lsp-settings'
+" Easy way to install and use LSPs.
+" I might use it in the future
+" Plug 'prabirshrestha/vim-lsp'
+" Plug 'mattn/vim-lsp-settings'
 
 " Telescope
 " Also do `choco install ripgrep` in order for Telescope to ignore .git/*
