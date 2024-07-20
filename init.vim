@@ -1,12 +1,11 @@
 " * SOURCE (mostly): https://github.com/amix/vimrc/blob/master/vimrcs/basic.vim
-" Everything from General to the helper functions are from the basic.vim config.
-" The parts of this config called Plugins, My own Configs, Language specific,
-" 	and Lua were all added by me
+" Everything from "General" to "helper functions" are from the basic.vim config.
+" Everything after that was added by me
 " I also removed a lot of things from the basic.vim config, mostly because this
-" 	started out as the config I used for when I had to use a Raspberry Pi,
-" 	which I used vim on.
-" If any comment that was in the original config file starts with a * then that
-" 	means I edited that part of the config
+" started out as the config I used for when I had to use a Raspberry Pi,
+" which I used vim on.
+" If any comment, that is the original config file, starts with a * then that
+" means I chaged something 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => General
@@ -106,12 +105,11 @@ set regexpengine=0
 " Set utf8 as standard encoding and en_US as the standard language
 set encoding=utf8
 
-" * Use DOS as the standard file type if the current OS is Windows. Else use unix
-"
-if has('unix')  
-	set ffs=unix,dos,mac
-else
+" * Use DOS as the standard file type if the current OS is Windows, else use unix
+if has('windows')  
 	set ffs=dos,unix,mac
+else
+	set ffs=unix,dos,mac
 endif
 
 
@@ -218,15 +216,24 @@ call plug#begin()
 " The most important one of all. Can't have a neovim config without this
 Plug 'ThePrimeagen/vim-be-good'
 
+" This is supposed to make using LSPs easier
+Plug 'prabirshrestha/vim-lsp'
+Plug 'mattn/vim-lsp-settings'
+
 " Telescope
 " Also do `choco install ripgrep` in order for Telescope to ignore .git/*
-" 	and .gitignore 
+" and .gitignore 
 " IMPORTANT: Also install the MSVC toolchain through `choco install mingw` and
 " 			 use mingw's gcc instead of cygwin's.
 " 			 I had to learn this the hard way (https://github.com/nvim-treesitter/nvim-treesitter/issues/6894)
 Plug 'nvim-lua/plenary.nvim'
 Plug 'neovim/nvim-lspconfig'
 Plug 'nvim-tree/nvim-web-devicons'
+" Telescope is the only reason I have Treesitter installed.
+" When I have Treesitter in my config, neovim is crashing numerous times.
+" And when I remove it, neovim isn't crashing when I'm doing the same things
+" that led to the crash. I can't even view the help page without the vimdoc
+" parser installed...
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'nvim-telescope/telescope.nvim'
 
@@ -272,7 +279,7 @@ let mapleader = ','
 set showcmd
 
 " This prevents the terminal's cursor being neovim's cursor instead
-" 	of the one it was meant to be after exiting neovim.
+" of the one it was meant to be after exiting neovim.
 " So now neovim uses the terminal's cursor.
 " TL;DR: Neovim acts weird on Windows Terminal
 autocmd VimLeave * set guicursor= | call chansend(v:stderr, "\x1b[ q")
@@ -296,7 +303,7 @@ nnoremap <leader>s :%s/
 nmap <leader>o i<cr><Esc>
 
 " It's a lot easier to type a colon on QWERTY than it is on QWERTZ,
-" 	so enter command mode when the spacebar is pressed
+" so enter command mode when the spacebar is pressed
 nnoremap <space> :
 
 " Change cwd to the path of the file
@@ -312,7 +319,7 @@ nnoremap ä  /
 
 " I have never and will never use + and - to move up and down a line.
 " Also + is significantly more accessible than ~ on QWERTZ
-" 	so change the key for switching cases from ~ to +
+" so change the key for switching cases from ~ to +
 map + ~
 
 " The ö-key on QWERTZ is where : and ; are on QWERTY.
@@ -321,6 +328,7 @@ nnoremap ö <cmd>Telescope find_files<cr>
 nnoremap Ö <cmd>Telescope<cr>
 nnoremap - <cmd>Telescope live_grep<cr>
 
+" It nice on my home PC, laptop, AND my work PC
 colorscheme catppuccin-macchiato
 
 " Resize the window with Ctrl+w++ and Ctrl+w+-
@@ -331,7 +339,7 @@ noremap <silent> <C-w>- <cmd>vertical resize -5<CR>
 
 " Enable the :Man command shipped inside Neovim's man filetype plugin.
 " And map "man" to "Man". And yes, I know that user commands have to start
-" 	with a capital letter but I don't care enough
+" with a capital letter but I don't really care
 runtime ftplugin/man.vim
 cabbrev man Man
 
