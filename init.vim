@@ -217,8 +217,8 @@ call plug#begin()
 Plug 'ThePrimeagen/vim-be-good'
 
 " This is supposed to make using LSPs easier
-Plug 'prabirshrestha/vim-lsp'
-Plug 'mattn/vim-lsp-settings'
+" Plug 'prabirshrestha/vim-lsp'
+" Plug 'mattn/vim-lsp-settings'
 
 " Telescope
 " Also do `choco install ripgrep` in order for Telescope to ignore .git/*
@@ -230,11 +230,14 @@ Plug 'nvim-lua/plenary.nvim'
 Plug 'neovim/nvim-lspconfig'
 Plug 'nvim-tree/nvim-web-devicons'
 " Telescope is the only reason I have Treesitter installed.
-" When I have Treesitter in my config, neovim is crashing numerous times.
-" And when I remove it, neovim isn't crashing when I'm doing the same things
-" that led to the crash. I can't even view the help page without the vimdoc
-" parser installed...
-Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+" When I have Treesitter in my config, Neovim is crashing numerous times
+" for the wildest reasons. And when I un-Plug Treesitter, Neovim isn't crashing
+" when I'm doing the same things that led to the crash.
+" I can't even view the help page without the vimdoc parser installed...
+" To add to that, Neovim completely freezes when I try to open Telescope on my Laptop
+if !empty(glob("C:/thisOnlyExistsOnMyLaptop"))
+	Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+endif
 Plug 'nvim-telescope/telescope.nvim'
 
 " I saw Primeagen having something like this.
