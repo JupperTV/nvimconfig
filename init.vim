@@ -236,7 +236,7 @@ Plug 'nvim-tree/nvim-web-devicons'
 " when I'm doing the same things that led to these crash.
 " I can't even view the help page without the vimdoc parser installed...
 " To add to that, Neovim completely freezes when I try to open Telescope on my Laptop
-if !empty(glob("C:/thisOnlyExistsOnMyLaptop"))
+if empty(glob("C:/thisOnlyExistsOnMyLaptop"))
 	Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 endif
 Plug 'nvim-telescope/telescope.nvim'
