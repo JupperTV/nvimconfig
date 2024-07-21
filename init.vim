@@ -355,7 +355,7 @@ nmap <C-h> <cmd>bprev<cr>
 nmap <C-l> <cmd>bnext<cr>
 
 " Close buffer with Ctrl+w ctrl+w
-nmap <C-w><C-w> <cmd>Bclose<cr>
+nmap <C-w><cr> <cmd>Bclose<cr>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Language specific
