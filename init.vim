@@ -233,7 +233,7 @@ Plug 'nvim-tree/nvim-web-devicons'
 " Telescope is the only reason I have Treesitter installed.
 " When I have Treesitter in my config, Neovim is crashing numerous times
 " for the wildest reasons. And when I un-Plug Treesitter, Neovim isn't crashing
-" when I'm doing the same things that led to the crash.
+" when I'm doing the same things that led to these crash.
 " I can't even view the help page without the vimdoc parser installed...
 " To add to that, Neovim completely freezes when I try to open Telescope on my Laptop
 if !empty(glob("C:/thisOnlyExistsOnMyLaptop"))
