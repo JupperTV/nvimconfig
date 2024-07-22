@@ -1,11 +1,24 @@
 " * SOURCE (mostly): https://github.com/amix/vimrc/blob/master/vimrcs/basic.vim
-" Everything from "General" to "helper functions" are from the basic.vim config.
-" Everything after that was added by me
-" I also removed a lot of things from the basic.vim config, mostly because this
-" started out as the config I used for when I had to use a Raspberry Pi,
-" which I used vim on.
-" If any comment, that is the original config file, starts with a * then that
-" means I chaged something 
+" Everything from "General" to "helper functions"
+" are from the basic.vim config.
+" Everything after that was added by me.
+" I also removed a lot of things from the basic.vim config, 
+" mostly because this started out as the config I used for 
+" back when I had to use a Raspberry Pi (around early 2023) 
+" for work, which I used vim on.
+" If any comment starts with a * then that means I changed
+" something from basic.vim
+ 
+" --------------------------------------------------------
+
+" THINGS TO INSTALL BEFORE USING THIS CONFIG:
+" Windows:
+" 	choco install ripgrep
+" 	choco install mingw
+" You might have to include mingw's bin folder to %PATH%
+" Debian-based Linux:
+" 	sudo apt install ripgrep
+" 	sudo apt install xclip
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => General
@@ -42,7 +55,7 @@ set wildmenu
 set wildignore=*.o,*~,*.pyc
 if has("win16") || has("win32")
     set wildignore+=.git\*,.hg\*,.svn\*
-
+else
     set wildignore+=*/.git/*,*/.hg/*,*/.svn/*,*/.DS_Store
 endif
 
@@ -227,18 +240,18 @@ Plug 'ThePrimeagen/vim-be-good'
 " IMPORTANT: Also install the MSVC toolchain through `choco install mingw` and
 " 			 use mingw's gcc instead of cygwin's.
 " 			 I had to learn this the hard way (https://github.com/nvim-treesitter/nvim-treesitter/issues/6894)
-Plug 'nvim-lua/plenary.nvim'
-Plug 'neovim/nvim-lspconfig'
-Plug 'nvim-tree/nvim-web-devicons'
+ Plug 'nvim-lua/plenary.nvim'
+ Plug 'neovim/nvim-lspconfig'
+ Plug 'nvim-tree/nvim-web-devicons'
 " Telescope is the only reason I have Treesitter installed.
 " When I have Treesitter in my config, Neovim is crashing numerous times
 " for the wildest reasons. And when I un-Plug Treesitter, Neovim isn't crashing
 " when I'm doing the same things that led to these crash.
 " I can't even view the help page without the vimdoc parser installed...
 " To add to that, Neovim completely freezes when I try to open Telescope on my Laptop
-if empty(glob("C:/thisOnlyExistsOnMyLaptop.txt"))
-	Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
-endif
+"if empty(glob("C:/thisOnlyExistsOnMyLaptop.txt")) || !has("unix")
+	 "Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+"endif
 Plug 'nvim-telescope/telescope.nvim'
 
 " I saw Primeagen having something like this.
@@ -248,14 +261,22 @@ Plug 'nvim-telescope/telescope.nvim'
 " 	instantly to 1 second.
 " Plug 'dense-analysis/ale'
 
-" A better Go experience
-" Only Plug it if it's my Laptop or my PC at home
+"A better Go experience
+"Only Plug it if it's my Laptop or my PC at home
 if empty(glob("C:\\thisOnlyExistsOnMyWorkPC.txt"))
-	Plug 'fatih/vim-go'
+ 	Plug 'fatih/vim-go'
 endif
 
-" catppuccin theme
-Plug 'catppuccin/nvim'
+" Use catppuccin on Windows and tender on WSL.
+" It just feels weird for neovim to look the same
+" on both Windows and WSL, when the terminals don't
+" (Windows CMD being black and white,
+" WLS Ubuntu being similiar to Canonical Aubergine (#300924)
+if has("win16") || has("win32")
+	Plug 'catppuccin/nvim'
+else
+	Plug 'jacoborus/tender.vim'
+endif
 
 " Found it on https://www.sethdaniel.dev/vim/plugins/ and I think it's kinda neat
 Plug 'joeytwiddle/sexy_scroller.vim'
@@ -268,6 +289,13 @@ Plug 'tpope/vim-commentary'
 " It's time to use buffers...
 Plug 'akinsho/bufferline.nvim', {'tag': '*'}
 
+" I saw these on images related to neovim and
+" never knew what these are called
+" vim-airline unfortunately is a little bit slow on WSL
+if !has("unix")
+	Plug 'vim-airline/vim-airline'
+endif
+
 call plug#end()
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -276,56 +304,77 @@ call plug#end()
 set nu
 set rnu
 
-" 2 Years of vim/nvim usage finally led me to using a leader key
+" 2 Years of vim/nvim usage finally led me to using
+" a leader key
 let mapleader = ','
 
-" The recently pressed key/keys appear on the bottom right corner when pressed
+" The recently pressed key/keys appear on the bottom 
+" right corner when pressed
 set showcmd
 
-" This prevents the terminal's cursor being neovim's cursor instead
-" of the one it was meant to be after exiting neovim.
+" This prevents the terminal's cursor being neovim's 
+" cursor instead of the one it was meant to be after 
+" exiting neovim.
 " So now neovim uses the terminal's cursor.
 " TL;DR: Neovim acts weird on Windows Terminal
 autocmd VimLeave * set guicursor= | call chansend(v:stderr, "\x1b[ q")
 
 set guicursor=
 
-" Switch nu and rnu depending on whether the window is focused or not 
+colorscheme tender
+
+" Switch nu and rnu depending on whether the window
+" is focused or not 
 augroup numbertoggle
 	autocmd!
 	autocmd BufEnter,FocusGained,InsertLeave,WinEnter	* if &nu && mode() != "i"	| set rnu | endif
 	autocmd BufLeave,FocusLost,InsertEnter,WinLeave 	* if &nu 					| set nornu | endif
 augroup END
 
+" -----------------
+
 " y removes highlighting
 nnoremap <silent>y :noh<CR>
 
-" Enter the prefix for replacing text when leader + s is pressed
+" Enter the prefix for replacing text when leader + s 
+" is pressed
 nnoremap <leader>s :%s/
 
 " leader + o inserts a new line at cursor
 nmap <leader>o i<cr><Esc>
 
-" It's a lot easier to type a colon on QWERTY than it is on QWERTZ,
+" It's a lot easier to type a colon on QWERTY
+" than it is on QWERTZ,
 " so enter command mode when the spacebar is pressed
 nnoremap <space> :
-
+"
 " Change cwd to the path of the file
 set autochdir
 
 " Use the system clipboard to yank and paste
+" ! TL;DR: INSTALL `xclip` WHEN ON WSL OR LINUX
+" clipboard=unnamedplus slows down neovim on WSL a lot
+" when something like xclip is not installed.
+" You can't do anything about it, except install something
+" like xlip, when  "-clipboard" appears when running
+" `nvim --version`
+"
+" How can I tell that this is a problem?: https://www.reddit.com/r/neovim/comments/llw7d9/comment/gnsmfix/?utm_source=share&utm_medium=web3x&utm_name=web3xcss&utm_term=1&utm_content=share_button
+" Solution : https://www.reddit.com/r/neovim/comments/llw7d9/comment/h1ys5bs/?utm_source=share&utm_medium=web3x&utm_name=web3xcss&utm_term=1&utm_content=share_button
 set clipboard=unnamedplus
 
-" Vim is adjusted for QWERTY which adds a few issues when using QWERTZ.
+" Vim is adjusted for QWERTY which adds
+" a few issues when using QWERTZ.
 " Partial Source: https://unix.stackexchange.com/questions/257392/vim-with-foreign-qwertz-keyboard
 nnoremap ü  ?
 nnoremap ä  /
 
-" I have never and will never use + and - to move up and down a line.
-" Also + is significantly more accessible than ~ on QWERTZ
-" so change the key for switching cases from ~ to +
+" I have never and will never use + and - to move up 
+" and down a line.
+" Also + is significantly more accessible
+" than ~ on QWERTZ, so change the key for switching cases from ~ to +
 map + ~
-
+"
 " The ö-key on QWERTZ is where : and ; are on QWERTY.
 " I use the spacebar to go into command mode anyway.
 nnoremap ö <cmd>Telescope find_files<cr>
@@ -333,7 +382,11 @@ nnoremap Ö <cmd>Telescope<cr>
 nnoremap - <cmd>Telescope live_grep<cr>
 
 " It nice on my home PC, laptop, AND my work PC
-colorscheme catppuccin-macchiato
+if has("win16") || has("win32")  
+ 	colorscheme catppuccin-macchiato
+else
+	colorscheme tender
+endif
 
 " Resize the window with Ctrl+w++ and Ctrl+w+-
 " noremap <silent> <C-w>+ <cmd>resize +2<CR>
