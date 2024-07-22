@@ -294,10 +294,7 @@ Plug 'akinsho/bufferline.nvim', {'tag': '*'}
 
 " I saw these on images related to neovim and
 " never knew what these are called
-" vim-airline unfortunately is a little bit slow on WSL
-if !has("unix")
-	Plug 'vim-airline/vim-airline'
-endif
+Plug 'vim-airline/vim-airline'
 
 call plug#end()
 
