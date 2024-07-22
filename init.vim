@@ -321,8 +321,6 @@ autocmd VimLeave * set guicursor= | call chansend(v:stderr, "\x1b[ q")
 
 set guicursor=
 
-colorscheme tender
-
 " Switch nu and rnu depending on whether the window
 " is focused or not 
 augroup numbertoggle
