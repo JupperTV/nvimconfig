@@ -279,7 +279,10 @@ else
 endif
 
 " Found it on https://www.sethdaniel.dev/vim/plugins/ and I think it's kinda neat
-Plug 'joeytwiddle/sexy_scroller.vim'
+" It unfortunately is slow on my Laptop
+if !has("unix") || empty(glob("C:\\thisOnlyExistsOnMyLaptop.txt"))
+	Plug 'joeytwiddle/sexy_scroller.vim'
+endif
 
 " gcc: Comment out a line
 " gc + motion: Comment out target of a motion
@@ -380,10 +383,15 @@ nnoremap Ö <cmd>Telescope<cr>
 nnoremap - <cmd>Telescope live_grep<cr>
 
 " It nice on my home PC, laptop, AND my work PC
+" I do prefer 2 different themes for 2 different OS'
+" because it feels weird when neovim looks the same
+" on 2 different OS'
 if has("win16") || has("win32")  
  	colorscheme catppuccin-macchiato
+	let g:airline_theme='catppuccin'
 else
 	colorscheme tender
+	let g:airline_theme='tender'
 endif
 
 " Resize the window with Ctrl+w++ and Ctrl+w+-
