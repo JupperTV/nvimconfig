@@ -413,6 +413,10 @@ nmap <C-l> <cmd>bnext<cr>
 " Close buffer with Ctrl+w ctrl+w
 nmap <C-w><cr> <cmd>Bclose<cr>
 
+" I only learned about this while doing vimtutor for fun...
+" How did I not know this before?
+set undofile
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Language specific
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
