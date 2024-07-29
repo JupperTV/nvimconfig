@@ -167,7 +167,8 @@ au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g
 set laststatus=2
 
 " Format the status line
-set statusline=\ %{HasPaste()}%F%m%r%h\ %w\ \ \ \ Line:\ %l\ \ Column:\ %c
+" * Not needed anymore since I use vim-airline/vim-airline
+"set statusline=\ %{HasPaste()}%F%m%r%h\ %w\ \ \ \ Line:\ %l\ \ Column:\ %c
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Editing mappings
@@ -278,12 +279,6 @@ else
 	Plug 'jacoborus/tender.vim'
 endif
 
-" Found it on https://www.sethdaniel.dev/vim/plugins/ and I think it's kinda neat
-" It unfortunately is slow on my Laptop
-if !has("unix") || empty(glob("C:\\thisOnlyExistsOnMyLaptop.txt"))
-	Plug 'joeytwiddle/sexy_scroller.vim'
-endif
-
 " gcc: Comment out a line
 " gc + motion: Comment out target of a motion
 " gcgc: Uncomment a line
@@ -328,8 +323,6 @@ augroup numbertoggle
 	autocmd BufEnter,FocusGained,InsertLeave,WinEnter	* if &nu && mode() != "i"	| set rnu | endif
 	autocmd BufLeave,FocusLost,InsertEnter,WinLeave 	* if &nu 					| set nornu | endif
 augroup END
-
-" -----------------
 
 " y removes highlighting
 nnoremap <silent>y :noh<CR>
