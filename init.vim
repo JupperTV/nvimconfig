@@ -246,7 +246,7 @@ Plug 'ThePrimeagen/vim-be-good'
 " Telescope is the only reason I have Treesitter installed.
 " When I have Treesitter in my config, Neovim is crashing numerous times
 " for the wildest reasons. And when I un-Plug Treesitter, Neovim isn't crashing
-" when I'm doing the same things that led to these crash.
+" when I'm doing the same things that led to these crashes.
 " I can't even view the help page without the vimdoc parser installed...
 " To add to that, Neovim completely freezes when I try to open Telescope on my Laptop
 "if empty(glob("C:/thisOnlyExistsOnMyLaptop.txt")) || !has("unix")
@@ -269,7 +269,7 @@ endif
 
 " Use catppuccin on Windows and tender on WSL.
 " It just feels weird for neovim to look the same
-" on both Windows and WSL, when the terminals don't
+" on both Windows and WSL when the terminals don't.
 " (Windows CMD being black and white,
 " WLS Ubuntu being similiar to Canonical Aubergine (#300924)
 if has("win16") || has("win32")
@@ -278,18 +278,18 @@ else
 	Plug 'jacoborus/tender.vim'
 endif
 
-" Found it on https://www.sethdaniel.dev/vim/plugins/ and I think it's kinda neat
+" Found it on https://www.sethdaniel.dev/vim/plugins/ and I think it's kinda neat.
 " It unfortunately is slow on my Laptop
-if !has("unix") || empty(glob("C:\\thisOnlyExistsOnMyLaptop.txt"))
-	Plug 'joeytwiddle/sexy_scroller.vim'
-endif
+" if !has("unix") empty(glob("C:\\thisOnlyExistsOnMyLaptop.txt"))
+" 	Plug 'joeytwiddle/sexy_scroller.vim'
+" endif
 
 " gcc: Comment out a line
 " gc + motion: Comment out target of a motion
 " gcgc: Uncomment a line
 Plug 'tpope/vim-commentary'
 
-" It's time to use buffers...
+" Tabs I guess
 Plug 'akinsho/bufferline.nvim', {'tag': '*'}
 
 " I saw these on images related to neovim and
@@ -394,8 +394,10 @@ endif
 " Resize the window with Ctrl+w++ and Ctrl+w+-
 " noremap <silent> <C-w>+ <cmd>resize +2<CR>
 " noremap <silent> <C-w>- <cmd>resize -2<CR>
-noremap <silent> <C-w>+ <cmd>vertical resize +5<CR>
 noremap <silent> <C-w>- <cmd>vertical resize -5<CR>
+noremap <silent> <C-w>+ <cmd>vertical resize +5<CR>
+noremap <silent> <C-w>, <cmd>horizontal resize -5<CR>
+noremap <silent> <C-w>+ <cmd>horizontal resize +5<CR>
 
 " Enable the :Man command shipped inside Neovim's man filetype plugin.
 " And map "man" to "Man". And yes, I know that user commands have to start
