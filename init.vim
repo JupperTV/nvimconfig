@@ -391,13 +391,11 @@ else
 	let g:airline_theme='tender'
 endif
 
-" Resize the window with Ctrl+w++ and Ctrl+w+-
-" noremap <silent> <C-w>+ <cmd>resize +2<CR>
-" noremap <silent> <C-w>- <cmd>resize -2<CR>
-noremap <silent> <C-w>- <cmd>vertical resize -5<CR>
+" Resize the windows
 noremap <silent> <C-w>+ <cmd>vertical resize +5<CR>
-noremap <silent> <C-w>, <cmd>horizontal resize -5<CR>
-noremap <silent> <C-w>+ <cmd>horizontal resize +5<CR>
+noremap <silent> <C-w># <cmd>vertical resize -5<CR>
+noremap <silent> <C-w>. <cmd>horizontal resize +5<CR>
+noremap <silent> <C-w>- <cmd>horizontal resize -5<CR>
 
 " Enable the :Man command shipped inside Neovim's man filetype plugin.
 " And map "man" to "Man". And yes, I know that user commands have to start
