@@ -167,7 +167,8 @@ au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g
 set laststatus=2
 
 " Format the status line
-set statusline=\ %{HasPaste()}%F%m%r%h\ %w\ \ \ \ Line:\ %l\ \ Column:\ %c
+" * Not needed anymore since I use vim-airline/vim-airline
+"set statusline=\ %{HasPaste()}%F%m%r%h\ %w\ \ \ \ Line:\ %l\ \ Column:\ %c
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Editing mappings
@@ -234,12 +235,7 @@ Plug 'ThePrimeagen/vim-be-good'
 " Plug 'prabirshrestha/vim-lsp'
 " Plug 'mattn/vim-lsp-settings'
 
-" Telescope
-" Also do `choco install ripgrep` in order for Telescope to ignore .git/*
-" and .gitignore 
-" IMPORTANT: Also install the MSVC toolchain through `choco install mingw` and
-" 			 use mingw's gcc instead of cygwin's.
-" 			 I had to learn this the hard way (https://github.com/nvim-treesitter/nvim-treesitter/issues/6894)
+" Telescope Dependencies
  Plug 'nvim-lua/plenary.nvim'
  Plug 'neovim/nvim-lspconfig'
  Plug 'nvim-tree/nvim-web-devicons'
@@ -250,8 +246,13 @@ Plug 'ThePrimeagen/vim-be-good'
 " I can't even view the help page without the vimdoc parser installed...
 " To add to that, Neovim completely freezes when I try to open Telescope on my Laptop
 "if empty(glob("C:/thisOnlyExistsOnMyLaptop.txt")) || !has("unix")
-	 "Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+	"Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 "endif
+" Also do `choco install ripgrep` in order for Telescope to ignore .git/*
+" and .gitignore 
+" IMPORTANT: Also install the MSVC toolchain through `choco install mingw` and
+" 			 use mingw's gcc instead of cygwin's.
+" 			 I had to learn this the hard way (https://github.com/nvim-treesitter/nvim-treesitter/issues/6894)
 Plug 'nvim-telescope/telescope.nvim'
 
 " I saw Primeagen having something like this.
@@ -271,22 +272,16 @@ endif
 " It just feels weird for neovim to look the same
 " on both Windows and WSL when the terminals don't.
 " (Windows CMD being black and white,
-" WLS Ubuntu being similiar to Canonical Aubergine (#300924)
+" WSL Ubuntu being similiar to Canonical Aubergine (#300924)
 if has("win16") || has("win32")
 	Plug 'catppuccin/nvim'
 else
 	Plug 'jacoborus/tender.vim'
 endif
 
-" Found it on https://www.sethdaniel.dev/vim/plugins/ and I think it's kinda neat.
-" It unfortunately is slow on my Laptop
-" if !has("unix") empty(glob("C:\\thisOnlyExistsOnMyLaptop.txt"))
-" 	Plug 'joeytwiddle/sexy_scroller.vim'
-" endif
-
 " gcc: Comment out a line
 " gc + motion: Comment out target of a motion
-" gcgc: Uncomment a line
+" gcgc: Uncomment out multiple lines
 Plug 'tpope/vim-commentary'
 
 " Tabs I guess
@@ -295,6 +290,8 @@ Plug 'akinsho/bufferline.nvim', {'tag': '*'}
 " I saw these on images related to neovim and
 " never knew what these are called
 Plug 'vim-airline/vim-airline'
+
+Plug 'folke/todo-comments.nvim'
 
 call plug#end()
 
@@ -316,7 +313,6 @@ set showcmd
 " cursor instead of the one it was meant to be after 
 " exiting neovim.
 " So now neovim uses the terminal's cursor.
-" TL;DR: Neovim acts weird on Windows Terminal
 autocmd VimLeave * set guicursor= | call chansend(v:stderr, "\x1b[ q")
 
 set guicursor=
@@ -328,8 +324,6 @@ augroup numbertoggle
 	autocmd BufEnter,FocusGained,InsertLeave,WinEnter	* if &nu && mode() != "i"	| set rnu | endif
 	autocmd BufLeave,FocusLost,InsertEnter,WinLeave 	* if &nu 					| set nornu | endif
 augroup END
-
-" -----------------
 
 " y removes highlighting
 nnoremap <silent>y :noh<CR>
@@ -350,15 +344,14 @@ nnoremap <space> :
 set autochdir
 
 " Use the system clipboard to yank and paste
-" ! TL;DR: INSTALL `xclip` WHEN ON WSL OR LINUX
+" ! TL;DR: INSTALL `xclip` WHEN ON WSL OR LINUX.
 " clipboard=unnamedplus slows down neovim on WSL a lot
 " when something like xclip is not installed.
-" You can't do anything about it, except install something
-" like xlip, when  "-clipboard" appears when running
-" `nvim --version`
+" You can't do anything about it, except install xlip,
+" when  "-clipboard" appears when running `nvim --version`.
 "
 " How can I tell that this is a problem?: https://www.reddit.com/r/neovim/comments/llw7d9/comment/gnsmfix/?utm_source=share&utm_medium=web3x&utm_name=web3xcss&utm_term=1&utm_content=share_button
-" Solution : https://www.reddit.com/r/neovim/comments/llw7d9/comment/h1ys5bs/?utm_source=share&utm_medium=web3x&utm_name=web3xcss&utm_term=1&utm_content=share_button
+" Solution: https://www.reddit.com/r/neovim/comments/llw7d9/comment/h1ys5bs/?utm_source=share&utm_medium=web3x&utm_name=web3xcss&utm_term=1&utm_content=share_button
 set clipboard=unnamedplus
 
 " Vim is adjusted for QWERTY which adds
@@ -372,7 +365,7 @@ nnoremap ä  /
 " Also + is significantly more accessible
 " than ~ on QWERTZ, so change the key for switching cases from ~ to +
 map + ~
-"
+
 " The ö-key on QWERTZ is where : and ; are on QWERTY.
 " I use the spacebar to go into command mode anyway.
 nnoremap ö <cmd>Telescope find_files<cr>
