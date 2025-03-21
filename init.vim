@@ -260,7 +260,7 @@ Plug 'nvim-telescope/telescope.nvim'
 " 	https://github.com/dense-analysis/ale/pull/4738 hasn't been merged either.
 " Ale slows down the process of going from insert mode to normal mode from almost
 " 	instantly to 1 second.
-" Plug 'dense-analysis/ale'
+Plug 'dense-analysis/ale'
 
 "A better Go experience
 "Only Plug it if it's my Laptop or my PC at home
