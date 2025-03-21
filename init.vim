@@ -118,11 +118,11 @@ set regexpengine=0
 " Set utf8 as standard encoding and en_US as the standard language
 set encoding=utf8
 
-" * Use DOS as the standard file type if the current OS is Windows, else use unix
-if has('windows')  
-	set ffs=dos,unix,mac
-else
+" * Use unix as the standard file type if the current OS is unix (usually WSL), else use dos
+if has('unix')  
 	set ffs=unix,dos,mac
+else
+	set ffs=dos,unix,mac
 endif
 
 
