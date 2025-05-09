@@ -265,7 +265,7 @@ Plug 'dense-analysis/ale'
 "A better Go experience
 "Only Plug it if it's my Laptop or my PC at home
 if empty(glob("C:\\thisOnlyExistsOnMyWorkPC.txt"))
- 	Plug 'fatih/vim-go'
+ 	Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 endif
 
 " Use catppuccin on Windows and tender on WSL.
@@ -339,7 +339,7 @@ nmap <leader>o i<cr><Esc>
 " than it is on QWERTZ,
 " so enter command mode when the spacebar is pressed
 nnoremap <space> :
-"
+
 " Change cwd to the path of the file
 set autochdir
 
@@ -372,10 +372,9 @@ nnoremap ö <cmd>Telescope find_files<cr>
 nnoremap Ö <cmd>Telescope<cr>
 nnoremap - <cmd>Telescope live_grep<cr>
 
-" It nice on my home PC, laptop, AND my work PC
 " I do prefer 2 different themes for 2 different OS'
-" because it feels weird when neovim looks the same
-" on 2 different OS'
+" because it feels weird to me when neovim looks
+" the same on 2 different OS'
 if has("win16") || has("win32")  
  	colorscheme catppuccin-macchiato
 	let g:airline_theme='catppuccin'
@@ -417,9 +416,9 @@ set undofile
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " Rulers for Python and C++
-" Python: PEP8 says 'Limit all lines to a maximum of 79 characters.
+" Python: PEP8 says: "Limit all lines to a maximum of 79 characters.
 " 		  For (...) docstrings or comments, the line length should
-" 		  be limited to 72 characters'
+" 		  be limited to 72 characters"
 " Cpp: I have read for about 20 minutes or so that some people use
 " 	   80 characters, some 120, so 100 is kind of a middle ground 
 autocmd FileType python set colorcolumn=73,80
