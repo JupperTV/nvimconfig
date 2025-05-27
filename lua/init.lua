@@ -6,3 +6,12 @@ require('telescope').setup {
 -- akinsho/bufferline.nvim
 require("bufferline").setup{}
 
+-- gen470/SmoothCursor.nvim
+require('smoothcursor').setup({
+  autostart = true,
+  cursor = "", -- Unicode-Cursor
+  texthl = "SmoothCursor",
+  linehl = nil,
+  type = "default",
+})
+

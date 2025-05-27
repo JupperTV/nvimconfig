@@ -239,7 +239,7 @@ Plug 'ThePrimeagen/vim-be-good'
  Plug 'nvim-lua/plenary.nvim'
  Plug 'neovim/nvim-lspconfig'
  Plug 'nvim-tree/nvim-web-devicons'
-" Telescope is the only reason I have Treesitter installed.
+" Telescope is the only reason I used to have Treesitter installed.
 " When I have Treesitter in my config, Neovim is crashing numerous times
 " for the wildest reasons. And when I un-Plug Treesitter, Neovim isn't crashing
 " when I'm doing the same things that led to these crashes.
@@ -250,20 +250,16 @@ Plug 'ThePrimeagen/vim-be-good'
 "endif
 " Also do `choco install ripgrep` in order for Telescope to ignore .git/*
 " and .gitignore 
-" IMPORTANT: Also install the MSVC toolchain through `choco install mingw` and
+" IMPORTANT: Install the MSVC toolchain through `choco install mingw` and
 " 			 use mingw's gcc instead of cygwin's.
 " 			 I had to learn this the hard way (https://github.com/nvim-treesitter/nvim-treesitter/issues/6894)
 Plug 'nvim-telescope/telescope.nvim'
 
 " I saw Primeagen having something like this.
-" Keep in mind that https://github.com/dense-analysis/ale/issues/4642 exists and 
-" 	https://github.com/dense-analysis/ale/pull/4738 hasn't been merged either.
-" Ale slows down the process of going from insert mode to normal mode from almost
-" 	instantly to 1 second.
 Plug 'dense-analysis/ale'
 
-"A better Go experience
-"Only Plug it if it's my Laptop or my PC at home
+" A better Go experience
+" Only Plug it if it's my Laptop or my PC at home
 if empty(glob("C:\\thisOnlyExistsOnMyWorkPC.txt"))
  	Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 endif
@@ -292,6 +288,9 @@ Plug 'akinsho/bufferline.nvim', {'tag': '*'}
 Plug 'vim-airline/vim-airline'
 
 Plug 'folke/todo-comments.nvim'
+
+" I saw this in https://wbg.gg/blog/neovim/#nvim-markdown.webm
+Plug 'gen740/SmoothCursor.nvim'
 
 call plug#end()
 
@@ -349,7 +348,6 @@ set autochdir
 " when something like xclip is not installed.
 " You can't do anything about it, except install xlip,
 " when  "-clipboard" appears when running `nvim --version`.
-"
 " How can I tell that this is a problem?: https://www.reddit.com/r/neovim/comments/llw7d9/comment/gnsmfix/?utm_source=share&utm_medium=web3x&utm_name=web3xcss&utm_term=1&utm_content=share_button
 " Solution: https://www.reddit.com/r/neovim/comments/llw7d9/comment/h1ys5bs/?utm_source=share&utm_medium=web3x&utm_name=web3xcss&utm_term=1&utm_content=share_button
 set clipboard=unnamedplus
