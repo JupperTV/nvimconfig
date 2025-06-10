@@ -223,7 +223,6 @@ endfunction
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Plugins
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
 " Note to myself: Do :PlugInstall when adding a new plugin
 call plug#begin()
 
@@ -236,9 +235,9 @@ Plug 'ThePrimeagen/vim-be-good'
 " Plug 'mattn/vim-lsp-settings'
 
 " Telescope Dependencies
- Plug 'nvim-lua/plenary.nvim'
- Plug 'neovim/nvim-lspconfig'
- Plug 'nvim-tree/nvim-web-devicons'
+Plug 'nvim-lua/plenary.nvim'
+Plug 'neovim/nvim-lspconfig'
+Plug 'nvim-tree/nvim-web-devicons'
 " Telescope is the only reason I used to have Treesitter installed.
 " When I have Treesitter in my config, Neovim is crashing numerous times
 " for the wildest reasons. And when I un-Plug Treesitter, Neovim isn't crashing
@@ -256,7 +255,9 @@ Plug 'ThePrimeagen/vim-be-good'
 Plug 'nvim-telescope/telescope.nvim'
 
 " I saw Primeagen having something like this.
+" Disable ALE on go files because https://github.com/dense-analysis/ale/issues/4984
 Plug 'dense-analysis/ale'
+autocmd FileType go let b:ale_enabled = 0
 
 " A better Go experience
 " Only Plug it if it's my Laptop or my PC at home
@@ -290,7 +291,7 @@ Plug 'vim-airline/vim-airline'
 Plug 'folke/todo-comments.nvim'
 
 " I saw this in https://wbg.gg/blog/neovim/#nvim-markdown.webm
-Plug 'gen740/SmoothCursor.nvim'
+Plug 'sphamba/smear-cursor.nvim'
 
 call plug#end()
 
@@ -313,7 +314,6 @@ set showcmd
 " exiting neovim.
 " So now neovim uses the terminal's cursor.
 autocmd VimLeave * set guicursor= | call chansend(v:stderr, "\x1b[ q")
-
 set guicursor=
 
 " Switch nu and rnu depending on whether the window
@@ -344,6 +344,7 @@ set autochdir
 
 " Use the system clipboard to yank and paste
 " ! TL;DR: INSTALL `xclip` WHEN ON WSL OR LINUX.
+" 
 " clipboard=unnamedplus slows down neovim on WSL a lot
 " when something like xclip is not installed.
 " You can't do anything about it, except install xlip,
@@ -364,6 +365,16 @@ nnoremap ä  /
 " than ~ on QWERTZ, so change the key for switching cases from ~ to +
 map + ~
 
+" Resize the windows
+noremap <silent> <C-w>+ <cmd>vertical resize +5<CR>
+noremap <silent> <C-w># <cmd>vertical resize -5<CR>
+noremap <silent> <C-w>. <cmd>horizontal resize +5<CR>
+noremap <silent> <C-w>- <cmd>horizontal resize -5<CR>
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Plugin Specific
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
 " The ö-key on QWERTZ is where : and ; are on QWERTY.
 " I use the spacebar to go into command mode anyway.
 nnoremap ö <cmd>Telescope find_files<cr>
@@ -381,11 +392,9 @@ else
 	let g:airline_theme='tender'
 endif
 
-" Resize the windows
-noremap <silent> <C-w>+ <cmd>vertical resize +5<CR>
-noremap <silent> <C-w># <cmd>vertical resize -5<CR>
-noremap <silent> <C-w>. <cmd>horizontal resize +5<CR>
-noremap <silent> <C-w>- <cmd>horizontal resize -5<CR>
+" The README.md of github.com/dense-analysis/ale said that
+" you can do this to see the status for ale in a nice format
+let g:airline#extensions#ale#enabled = 1
 
 " Enable the :Man command shipped inside Neovim's man filetype plugin.
 " And map "man" to "Man". And yes, I know that user commands have to start
@@ -427,7 +436,12 @@ autocmd FileType cpp set colorcolumn=101
 
 " Get the Golang documentation for the selected code when shift+k is pressed.
 " The default functionality of shift+k is still present for every other filetype
-au filetype go vnoremap K <cmd>GoDoc<cr>
+au FileType go vnoremap K <cmd>GoDoc<cr>
+
+let g:go_def_mode='gopls'
+let g:go_info_mode='gopls'
+
+let g:ale_linters = { }
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Lua

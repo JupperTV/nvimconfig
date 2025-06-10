@@ -1,17 +1,11 @@
 
+-- nvim-telescope/telescope.nvim
 require('telescope').setup {
-	file_ignore_patterns = { "^node_modules/", ".cache", "%.o", "%.a", "%.exe", "%.out", "%.class", "%.dll", "%.pdf", "%.mkv", "%.mp4", "%.zip" }
+	file_ignore_patterns = { "^node_modules/", ".cache", "%.o", "%.a", "%.exe", "%.out", "%.class", "%.dll", "%.pdf", "%.mkv", "%.mp4", "%.zip", "%.otf", "%.ttf" }
 }
 
 -- akinsho/bufferline.nvim
 require("bufferline").setup{}
 
--- gen470/SmoothCursor.nvim
-require('smoothcursor').setup({
-  autostart = true,
-  cursor = "", -- Unicode-Cursor
-  texthl = "SmoothCursor",
-  linehl = nil,
-  type = "default",
-})
-
+-- sphamba/smear-cursor.nvim
+require('smear_cursor').enabled = true
