@@ -219,7 +219,6 @@ function! <SID>BufcloseCloseIt()
     endif
 endfunction
 
-
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Plugins
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -234,43 +233,69 @@ Plug 'ThePrimeagen/vim-be-good'
 " Plug 'prabirshrestha/vim-lsp'
 " Plug 'mattn/vim-lsp-settings'
 
-" Telescope Dependencies
+" It feels like every other plugin has a dependency on this
 Plug 'nvim-lua/plenary.nvim'
-Plug 'neovim/nvim-lspconfig'
-Plug 'nvim-tree/nvim-web-devicons'
-" Telescope is the only reason I used to have Treesitter installed.
-" When I have Treesitter in my config, Neovim is crashing numerous times
-" for the wildest reasons. And when I un-Plug Treesitter, Neovim isn't crashing
-" when I'm doing the same things that led to these crashes.
-" I can't even view the help page without the vimdoc parser installed...
-" To add to that, Neovim completely freezes when I try to open Telescope on my Laptop
-"if empty(glob("C:/thisOnlyExistsOnMyLaptop.txt")) || !has("unix")
-	"Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
-"endif
-" Also do `choco install ripgrep` in order for Telescope to ignore .git/*
-" and .gitignore 
-" IMPORTANT: Install the MSVC toolchain through `choco install mingw` and
-" 			 use mingw's gcc instead of cygwin's.
-" 			 I had to learn this the hard way (https://github.com/nvim-treesitter/nvim-treesitter/issues/6894)
-Plug 'nvim-telescope/telescope.nvim'
 
-" I saw Primeagen having something like this.
-" Disable ALE on go files because https://github.com/dense-analysis/ale/issues/4984
-Plug 'dense-analysis/ale'
-autocmd FileType go let b:ale_enabled = 0
+" Don't load these on my laptop:
+if empty(glob('C:/thisOnlyExistsOnMyLaptop.txt'))
+	" Telescope dependencies
+	Plug 'neovim/nvim-lspconfig'
+	Plug 'nvim-tree/nvim-web-devicons'
 
-" A better Go experience
-" Only Plug it if it's my Laptop or my PC at home
-if empty(glob("C:\\thisOnlyExistsOnMyWorkPC.txt"))
- 	Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+	" TLDR: Telescope used to be annoying with treesitter plugged. Now it's kinda ok I think
+	" -------------------------------------------------------------------------------------
+	" Telescope is the only reason I used to have Treesitter installed.
+	" When I have Treesitter in my config, Neovim is crashing numerous times
+	" for the wildest reasons. And when I un-Plug Treesitter, Neovim isn't crashing
+	" when I'm doing the same things that led to these crashes.
+	" I can't even view the help page without the vimdoc parser installed...
+	" To add to that, Neovim completely freezes when I try to open Telescope on my Laptop
+	" Update: Ok, Telescope works on my Laptop many months after those crashes occured.
+	" 		  But it's still not plugged on my laptop for startuptime and speed
+	" Also do `choco install ripgrep` in order for Telescope to ignore .git/*
+	" and .gitignore 
+	" IMPORTANT: Install the MSVC toolchain through `choco install mingw` and
+	" 			 use mingw's gcc instead of cygwin's gcc.
+	" 			 I had to learn this the hard way (https://github.com/nvim-treesitter/nvim-treesitter/issues/6894)
+	" TODO: Maybe plug it on WSL too?
+	if !has('unix')
+		Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+	endif
+
+	Plug 'nvim-telescope/telescope.nvim'
+
+	" I saw Primeagen having something like this".
+	" Disable ALE on go files because https://github.com/dense-analysis/ale/issues/4984
+	Plug 'dense-analysis/ale'
+	autocmd FileType go let b:ale_enabled = 0
+
+	" I saw these on images related to neovim and
+	" never knew what these are called
+	" Also don't plug it on my laptop
+	Plug 'vim-airline/vim-airline'
+	
+	" I saw this in https://wbg.gg/blog/neovim/#nvim-markdown.webm
+	Plug 'sphamba/smear-cursor.nvim'
 endif
 
-" Use catppuccin on Windows and tender on WSL.
-" It just feels weird for neovim to look the same
-" on both Windows and WSL when the terminals don't.
-" (Windows CMD being black and white,
+
+" A better Go experience
+" Only Plug it if it's my Laptop or my PC at home.
+" This will only be enabled on go files
+if empty(glob("C:\\thisOnlyExistsOnMyWorkPC.txt"))
+	Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries', 'for': ['go'] }
+endif
+
+" - Laptop: noirbuddy
+" - Other Windows devices: catppuccin
+" - WSL: tender
+" It just feels weird to me for neovim to look the same
+" across different systems.
 " WSL Ubuntu being similiar to Canonical Aubergine (#300924)
-if has("win16") || has("win32")
+if !empty("C:\\thisOnlyExistsOnMyLaptop.txt")
+	Plug 'tjdevries/colorbuddy.nvim'
+	Plug 'jesseleite/nvim-noirbuddy' 
+elseif has("win16") || has("win32")
 	Plug 'catppuccin/nvim'
 else
 	Plug 'jacoborus/tender.vim'
@@ -278,20 +303,11 @@ endif
 
 " gcc: Comment out a line
 " gc + motion: Comment out target of a motion
-" gcgc: Uncomment out multiple lines
+" gcgc: Uncomment out multiple lines 
 Plug 'tpope/vim-commentary'
 
 " Tabs I guess
 Plug 'akinsho/bufferline.nvim', {'tag': '*'}
-
-" I saw these on images related to neovim and
-" never knew what these are called
-Plug 'vim-airline/vim-airline'
-
-Plug 'folke/todo-comments.nvim'
-
-" I saw this in https://wbg.gg/blog/neovim/#nvim-markdown.webm
-Plug 'sphamba/smear-cursor.nvim'
 
 call plug#end()
 
@@ -304,6 +320,10 @@ set rnu
 " 2 Years of vim/nvim usage finally led me to using
 " a leader key
 let mapleader = ','
+
+" I only learned about this while doing vimtutor for fun...
+" How did I not know this before?
+set undofile
 
 " The recently pressed key/keys appear on the bottom 
 " right corner when pressed
@@ -342,30 +362,33 @@ nnoremap <space> :
 " Change cwd to the path of the file
 set autochdir
 
-" Use the system clipboard to yank and paste
-" ! TL;DR: INSTALL `xclip` WHEN ON WSL OR LINUX.
-" 
+" Use the system clipboard to yank and paste.
+" TLDR: INSTALL `xclip` WHEN ON WSL OR LINUX.
+" -------------------------------------------
 " clipboard=unnamedplus slows down neovim on WSL a lot
 " when something like xclip is not installed.
-" You can't do anything about it, except install xlip,
+" You can't do anything about it, except to install xlip,
 " when  "-clipboard" appears when running `nvim --version`.
 " How can I tell that this is a problem?: https://www.reddit.com/r/neovim/comments/llw7d9/comment/gnsmfix/?utm_source=share&utm_medium=web3x&utm_name=web3xcss&utm_term=1&utm_content=share_button
 " Solution: https://www.reddit.com/r/neovim/comments/llw7d9/comment/h1ys5bs/?utm_source=share&utm_medium=web3x&utm_name=web3xcss&utm_term=1&utm_content=share_button
 set clipboard=unnamedplus
 
-" Vim is adjusted for QWERTY which adds
-" a few issues when using QWERTZ.
+" Vim is adjusted for QWERTY which adds a few issues when using QWERTZ.
 " Partial Source: https://unix.stackexchange.com/questions/257392/vim-with-foreign-qwertz-keyboard
 nnoremap ü  ?
 nnoremap ä  /
 
-" I have never and will never use + and - to move up 
-" and down a line.
-" Also + is significantly more accessible
-" than ~ on QWERTZ, so change the key for switching cases from ~ to +
+" I have never and will never use '+' and '-' to move up and down a line.
+" Also '+' is significantly more accessible than '~' on QWERTZ
+" so change the key for switching cases from '~' to '+'.
+" Also works on non-Latin letters like cyrillic letters too!
 map + ~
 
 " Resize the windows
+" Ctrl+w and '+': Make the window on the left/right wider.
+" Ctrl+w and '#': Make the window on the left/right tighter.
+" Ctrl+w and '.': Make the window above/below taller.
+" Ctrl+w and '-': Make the window above/below smaller.
 noremap <silent> <C-w>+ <cmd>vertical resize +5<CR>
 noremap <silent> <C-w># <cmd>vertical resize -5<CR>
 noremap <silent> <C-w>. <cmd>horizontal resize +5<CR>
@@ -375,25 +398,29 @@ noremap <silent> <C-w>- <cmd>horizontal resize -5<CR>
 " => Plugin Specific
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
+" Don't load these on my laptop
+if empty('C:\\thisOnlyExistsOnMyLaptop.txt')
 " The ö-key on QWERTZ is where : and ; are on QWERTY.
 " I use the spacebar to go into command mode anyway.
-nnoremap ö <cmd>Telescope find_files<cr>
-nnoremap Ö <cmd>Telescope<cr>
-nnoremap - <cmd>Telescope live_grep<cr>
+	nnoremap ö <cmd>Telescope find_files<cr>
+	nnoremap Ö <cmd>Telescope<cr>
+	nnoremap - <cmd>Telescope live_grep<cr>
 
-" I do prefer 2 different themes for 2 different OS'
-" because it feels weird to me when neovim looks
-" the same on 2 different OS'
-if has("win16") || has("win32")  
- 	colorscheme catppuccin-macchiato
-	let g:airline_theme='catppuccin'
-else
-	colorscheme tender
-	let g:airline_theme='tender'
+	" Set airline theme differently depending on the OS
+	" because I like it that way
+	if has("win16") || has("win32")
+	 	colorscheme catppuccin-macchiato
+		let g:airline_theme='catppuccin'
+	else
+		colorscheme tender
+		let g:airline_theme='tender'
+	endif
 endif
 
 " The README.md of github.com/dense-analysis/ale said that
-" you can do this to see the status for ale in a nice format
+" you can do this to see the status for ale in a nice format.
+" This doesn't do anything if airline isn't plugged
+" so it's not necessary to check if this is being executed on my laptop.
 let g:airline#extensions#ale#enabled = 1
 
 " Enable the :Man command shipped inside Neovim's man filetype plugin.
@@ -405,18 +432,15 @@ cabbrev man Man
 " akinsho/bufferline.nvim needs this
 set termguicolors
 
+" These are technically not exclusively used in plugins
+" but I wouldn't use those if it wouldn't have been for bufferline.
 " Go to previous/next buffer with Ctrl+h and Ctrl+l
 nmap <C-h> <cmd>bprev<cr>
 nmap <C-l> <cmd>bnext<cr>
-
 " Close buffer with Ctrl+w ctrl+w
 nmap <C-w><cr> <cmd>Bclose<cr>
-
+" Create a new tab when t + n are pressed
 map tn <cmd>tabnew<cr>
-
-" I only learned about this while doing vimtutor for fun...
-" How did I not know this before?
-set undofile
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Language specific
@@ -436,16 +460,16 @@ autocmd FileType cpp set colorcolumn=101
 
 " Get the Golang documentation for the selected code when shift+k is pressed.
 " The default functionality of shift+k is still present for every other filetype
-au FileType go vnoremap K <cmd>GoDoc<cr>
-
-let g:go_def_mode='gopls'
-let g:go_info_mode='gopls'
-
-let g:ale_linters = { }
+" NOTE: Doesn't always work unfortunately...
+autocmd FileType go vnoremap K <cmd>GoDoc<cr>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Lua
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " Lastly, load the lua file
-lua require('init')
+if empty(glob('C:/thisOnlyExistsOnMyLaptop.txt'))
+	lua require('pc')
+else
+	lua require('laptop')
+endif
