@@ -292,7 +292,7 @@ endif
 " It just feels weird to me for neovim to look the same
 " across different systems.
 " WSL Ubuntu being similiar to Canonical Aubergine (#300924)
-if !empty("C:\\thisOnlyExistsOnMyLaptop.txt")
+if !empty(glob("C:\\thisOnlyExistsOnMyLaptop.txt"))
 	Plug 'tjdevries/colorbuddy.nvim'
 	Plug 'jesseleite/nvim-noirbuddy' 
 elseif has("win16") || has("win32")
@@ -399,7 +399,7 @@ noremap <silent> <C-w>- <cmd>horizontal resize -5<CR>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " Don't load these on my laptop
-if empty('C:\\thisOnlyExistsOnMyLaptop.txt')
+if empty(glob('C:\\thisOnlyExistsOnMyLaptop.txt'))
 " The ö-key on QWERTZ is where : and ; are on QWERTY.
 " I use the spacebar to go into command mode anyway.
 	nnoremap ö <cmd>Telescope find_files<cr>
@@ -408,7 +408,7 @@ if empty('C:\\thisOnlyExistsOnMyLaptop.txt')
 
 	" Set airline theme differently depending on the OS
 	" because I like it that way
-	if has("win16") || has("win32")
+	if has('win16') || has('win32')
 	 	colorscheme catppuccin-macchiato
 		let g:airline_theme='catppuccin'
 	else
