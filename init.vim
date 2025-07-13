@@ -282,7 +282,7 @@ endif
 " A better Go experience
 " Only Plug it if it's my Laptop or my PC at home.
 " This will only be enabled on go files
-if empty(glob("C:\\thisOnlyExistsOnMyWorkPC.txt"))
+if empty(glob("C:/thisOnlyExistsOnMyWorkPC.txt"))
 	Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries', 'for': ['go'] }
 endif
 
@@ -292,7 +292,7 @@ endif
 " It just feels weird to me for neovim to look the same
 " across different systems.
 " WSL Ubuntu being similiar to Canonical Aubergine (#300924)
-if !empty(glob("C:\\thisOnlyExistsOnMyLaptop.txt"))
+if !empty(glob("C:/thisOnlyExistsOnMyLaptop.txt"))
 	Plug 'tjdevries/colorbuddy.nvim'
 	Plug 'jesseleite/nvim-noirbuddy' 
 elseif has("win16") || has("win32")
@@ -399,7 +399,7 @@ noremap <silent> <C-w>- <cmd>horizontal resize -5<CR>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " Don't load these on my laptop
-if empty(glob('C:\\thisOnlyExistsOnMyLaptop.txt'))
+if empty(glob('C:/thisOnlyExistsOnMyLaptop.txt'))
 " The ö-key on QWERTZ is where : and ; are on QWERTY.
 " I use the spacebar to go into command mode anyway.
 	nnoremap ö <cmd>Telescope find_files<cr>
@@ -454,6 +454,7 @@ map tn <cmd>tabnew<cr>
 " 	   80 characters, some 120, so 100 is kind of a middle ground 
 autocmd FileType python set colorcolumn=73,80
 autocmd FileType c++ set colorcolumn=101
+
 
 " Just in case
 autocmd FileType cpp set colorcolumn=101
