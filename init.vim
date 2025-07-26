@@ -250,28 +250,28 @@ if empty(glob('C:/thisOnlyExistsOnMyLaptop.txt'))
 	" when I'm doing the same things that led to these crashes.
 	" I can't even view the help page without the vimdoc parser installed...
 	" To add to that, Neovim completely freezes when I try to open Telescope on my Laptop
-	" Update: Ok, Telescope works on my Laptop many months after those crashes occured.
+	" Update: Telescope works on my Laptop many months after those crashes occured.
 	" 		  But it's still not plugged on my laptop for startuptime and speed
 	" Also do `choco install ripgrep` in order for Telescope to ignore .git/*
 	" and .gitignore 
 	" IMPORTANT: Install the MSVC toolchain through `choco install mingw` and
 	" 			 use mingw's gcc instead of cygwin's gcc.
 	" 			 I had to learn this the hard way (https://github.com/nvim-treesitter/nvim-treesitter/issues/6894)
-	" TODO: Maybe plug it on WSL too?
-	if !has('unix')
-		Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
-	endif
+	" Unplugged because (somehow) Telescope runs smoother without it 
+	" if !has('unix')
+	" 	Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+	" endif
 
 	Plug 'nvim-telescope/telescope.nvim'
 
-	" I saw Primeagen having something like this".
-	" Disable ALE on go files because https://github.com/dense-analysis/ale/issues/4984
-	Plug 'dense-analysis/ale'
-	autocmd FileType go let b:ale_enabled = 0
+	" I saw Primeagen having something like this
+	" Completely un-Plugged because:
+	" 	- It slows down going from insert -> normal mode drastically.
+	" 	- It slows down smear-cursor
+	" Plug 'dense-analysis/ale'
 
 	" I saw these on images related to neovim and
 	" never knew what these are called
-	" Also don't plug it on my laptop
 	Plug 'vim-airline/vim-airline'
 	
 	" I saw this in https://wbg.gg/blog/neovim/#nvim-markdown.webm
@@ -291,7 +291,6 @@ endif
 " - WSL: tender
 " It just feels weird to me for neovim to look the same
 " across different systems.
-" WSL Ubuntu being similiar to Canonical Aubergine (#300924)
 if !empty(glob("C:/thisOnlyExistsOnMyLaptop.txt"))
 	Plug 'tjdevries/colorbuddy.nvim'
 	Plug 'jesseleite/nvim-noirbuddy' 
@@ -306,7 +305,7 @@ endif
 " gcgc: Uncomment out multiple lines 
 Plug 'tpope/vim-commentary'
 
-" Tabs I guess
+" Tabs
 Plug 'akinsho/bufferline.nvim', {'tag': '*'}
 
 call plug#end()
@@ -416,12 +415,6 @@ if empty(glob('C:/thisOnlyExistsOnMyLaptop.txt'))
 		let g:airline_theme='tender'
 	endif
 endif
-
-" The README.md of github.com/dense-analysis/ale said that
-" you can do this to see the status for ale in a nice format.
-" This doesn't do anything if airline isn't plugged
-" so it's not necessary to check if this is being executed on my laptop.
-let g:airline#extensions#ale#enabled = 1
 
 " Enable the :Man command shipped inside Neovim's man filetype plugin.
 " And map "man" to "Man". And yes, I know that user commands have to start
