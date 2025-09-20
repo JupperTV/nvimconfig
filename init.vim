@@ -286,15 +286,11 @@ if empty(glob("C:/thisOnlyExistsOnMyWorkPC.txt"))
 	Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries', 'for': ['go'] }
 endif
 
-" - Laptop: noirbuddy
 " - Other Windows devices: catppuccin
 " - WSL: tender
 " It just feels weird to me for neovim to look the same
 " across different systems.
-if !empty(glob("C:/thisOnlyExistsOnMyLaptop.txt"))
-	Plug 'tjdevries/colorbuddy.nvim'
-	Plug 'jesseleite/nvim-noirbuddy' 
-elseif has("win16") || has("win32")
+if !empty(glob("C:/thisOnlyExistsOnMyLaptop.txt")) && (has("win16") || has("win32"))
 	Plug 'catppuccin/nvim'
 else
 	Plug 'jacoborus/tender.vim'
@@ -414,6 +410,9 @@ if empty(glob('C:/thisOnlyExistsOnMyLaptop.txt'))
 		colorscheme tender
 		let g:airline_theme='tender'
 	endif
+else 
+	" Use wildcharm on my laptop
+	colorscheme wildcharm
 endif
 
 " Enable the :Man command shipped inside Neovim's man filetype plugin.
